@@ -25,7 +25,7 @@ type User = {
   email: string;
 };
 
-const API = "https://sasima-ajaia-docs.onrender.com/";
+const API = "https://sasima-ajaia-docs.onrender.com";
 const TOKEN_KEY = "ajaia_token";
 
 export default function App() {
@@ -56,17 +56,25 @@ export default function App() {
   const activeIdRef = useRef(activeId);
   activeIdRef.current = activeId;
 
-  function apiFetch(path: string, options: RequestInit = {}, token?: string) {
-    const authToken = token || localStorage.getItem(TOKEN_KEY) || "";
-    const headers = new Headers(options.headers);
-    headers.set("Content-Type", "application/json");
-    if (authToken) headers.set("Authorization", `Bearer ${authToken}`);
+  function apiFetch(
+  path: string,
+  options: RequestInit = {},
+  token?: string
+) {
+  const authToken = token || localStorage.getItem(TOKEN_KEY) || "";
+  const headers = new Headers(options.headers);
 
-    return fetch(`${API}${path}`, {
-      ...options,
-      headers
-    });
+  headers.set("Content-Type", "application/json");
+
+  if (authToken) {
+    headers.set("Authorization", `Bearer ${authToken}`);
   }
+
+  return fetch(`${API}${path}`, {
+    ...options,
+    headers
+  });
+}
 
   function mapDocument(doc: any, permission?: Doc["permission"]): Doc {
     return {
