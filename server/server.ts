@@ -11,11 +11,15 @@ dotenv.config({ path: "../.env" });
 const app = express();
 const PORT = Number(process.env.PORT) || 5000;
 
-app.use(cors({
-  origin: "https://kaleidoscopic-crepe-64d934.netlify.app/",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5175",
+      "https://kaleidoscopic-crepe-64d934.netlify.app"
+    ],
+    credentials: true
+  })
+);
 
 app.use(express.json());app.use(express.json());
 
