@@ -25,7 +25,7 @@ type User = {
   email: string;
 };
 
-const API = "http://localhost:5000/api";
+const API = "https://sasima-ajaia-docs.onrender.com/";
 const TOKEN_KEY = "ajaia_token";
 
 export default function App() {
